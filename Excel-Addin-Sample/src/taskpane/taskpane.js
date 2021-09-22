@@ -23,9 +23,28 @@ Office.onReady((info) => {
     document.getElementById("app-body").style.display = "flex";    
     document.getElementById("filter-table").onclick = filterTable;
     document.getElementById("sort-table").onclick = sortTable;
+    document.getElementById("create-chart").onclick = createChart;
   }
 });
 
+export async function createChart() {
+  try{  
+    await Excel.run(async context => {
+      var currentWorksheet = context.workbook.worksheets.getActiveWorksheet();
+      var expensesTable = currentWorksheet.tables.getItem('ExpensesTable');
+      var dataRange = expensesTable.getDataBodyRange();
+      var chart = currentWorksheet.charts.add('ColumnClustered', dataRange, 'auto');
+      chart.setPosition("A15", "F30");
+      chart.title.text = "Expenses";
+      chart.legend.position = "right";
+      chart.legend.format.fill.setSolidColor("white");
+      chart.dataLabels.format.font.size = 15;
+      chart.series.getItemAt(0).name = "Value in &euro;";
+    });
+  }catch(error){
+    handleError(error);
+  }
+}
 export async function sortTable() {
   try{
     await Excel.run(async context => {
