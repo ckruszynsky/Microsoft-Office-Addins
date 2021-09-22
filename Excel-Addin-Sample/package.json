@@ -9,7 +9,8 @@
   "config": {
     "app_to_debug": "excel",
     "app_type_to_debug": "desktop",
-    "dev_server_port": 3000
+    "dev_server_port": 3000,
+    "document": "https://turnerind-my.sharepoint.com/:x:/r/personal/ckruszynsky_turner-industries_com/_layouts/15/Doc.aspx?sourcedoc=%7B38B0ED09-EA4E-4191-8878-62333FC6B85F%7D&file=Book.xlsx&action=editnew&mobileredirect=true&wdNewAndOpenCt=1632321540055&ct=1632321540055&wdPreviousSession=f3546218-2fa4-47c4-99b5-e98e68f25d0d&wdOrigin=OFFICECOM-WEB.START.NEW"
   },
   "scripts": {
     "build": "webpack -p --mode production --https false",

@@ -38,7 +38,27 @@ function getGlobal() {
     : undefined;
 }
 
+export async function toggleProtection(args){
+  try{
+    Excel.run(async context => {
+      var sheet = context.workbook.worksheets.getActiveWorksheet();
+       sheet.load("protection/protected");
+       await context.sync();
+       console.log(`Sheet Protection: ${sheet.protection}`);
+      if(sheet.protection.protected){
+        sheet.protection.unprotect();
+      }else {
+        sheet.protection.protect();
+      }
+    });
+  }catch(error){
+    handleError(error);
+  }
+  args.completed();
+}
+
 const g = getGlobal();
 
 // The add-in command functions need to be available in global scope
 g.action = action;
+g.toggleProtection = toggleProtection;

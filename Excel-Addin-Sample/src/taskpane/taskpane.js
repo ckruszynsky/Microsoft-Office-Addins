@@ -24,9 +24,21 @@ Office.onReady((info) => {
     document.getElementById("filter-table").onclick = filterTable;
     document.getElementById("sort-table").onclick = sortTable;
     document.getElementById("create-chart").onclick = createChart;
+    document.getElementById("freeze-header").onclick = freezeHeader;
   }
 });
 
+export async function freezeHeader() {
+  try{
+    console.log("freeze header");
+    await Excel.run(async context => {
+      var currentWorksheet = context.workbook.worksheets.getActiveWorksheet();
+      currentWorksheet.freezePanes.freezeRows(1);
+    });
+  }catch(error){
+    handleError(error);
+  }
+}
 export async function createChart() {
   try{  
     await Excel.run(async context => {
